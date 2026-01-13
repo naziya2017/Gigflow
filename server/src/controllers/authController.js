@@ -63,7 +63,6 @@ export const login = async (req, res) => {
   httpOnly: true,
   secure: true,
   sameSite: "none",
-  domain: ".onrender.com",  
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 });
@@ -86,7 +85,6 @@ export const logout = (req, res) => {
   httpOnly: true,
   secure: true,
   sameSite: "none",
-  domain: ".onrender.com",  
   path: "/",
   expires: new Date(0),
 });
