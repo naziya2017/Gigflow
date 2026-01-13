@@ -59,13 +59,15 @@ export const login = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, 
-      sameSite: "none",
-      path:"/",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+  res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  domain: ".onrender.com",  
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+
 
     res.json({
       message: "Login successful",
@@ -80,13 +82,15 @@ export const login = async (req, res) => {
   }
 };
 export const logout = (req, res) => {
-  res.cookie("token", "", {
-    httpOnly: true,
-    expires: new Date(0),
-    path:"/",
-    sameSite: "none",
-    secure: true, 
-  });
+ res.cookie("token", "", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  domain: ".onrender.com",  
+  path: "/",
+  expires: new Date(0),
+});
+
 
   res.json({ message: "Logged out successfully" });
 };
