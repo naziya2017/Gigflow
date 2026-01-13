@@ -18,9 +18,19 @@ app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://gigflow-two.vercel.app"],
-  credentials: true
+  origin: function (origin, callback) {
+    if (
+      !origin ||
+      origin.includes("vercel.app")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/gigs",gigRoutes);
 app.use("/api/bids", bidRoutes);
